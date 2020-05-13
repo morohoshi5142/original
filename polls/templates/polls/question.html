@@ -1,0 +1,54 @@
+{% extends 'polls/base.html' %} {% block content %} {% load md %} {% load static %}
+
+<!--日記詳細-->
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="card border-dark m-1">
+          <div class="card ">
+            <h3>{{playquestion.title}}</h3>
+            <p>{{playquestion.name}}</p>
+            <p>{{playquestion.pub_date}}</p>
+            {% if playquestion.image %}
+            <img src="{{ playquestion.image.url }}" class="img-fluid" alt="Responsive image" width="80%"> {% endif %}
+            <p>{{playquestion.question_text| markdown_to_html}}</p>
+            {% for tag in playquestion.tag.all %}
+            <p>{{tag.name}}</P>
+            {% endfor %}
+            <p><a href="{% url 'answercreate' playquestion.id %}">解答する</a></p>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12 col-md-12">
+          {% for answer in playquestion.answer_set.all %}
+          <!--主従の従側から持ってくる場合はsetを使う-->
+
+          <div class="card border-dark m-1">
+            <!--for文のすぐ下-->
+            <div class="card ">
+              <p>{{answer.user}}</P>
+              <p>{{answer.text}}</P>
+              <div class="badge badge-pill badge-success ">
+                <a href="{% url 'like' answer.id %}" class="text-white">いいね！</a>{{ answer.like_num }}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <a href="/polls/">トップページ</a>
+
+
+
+{% endblock %}

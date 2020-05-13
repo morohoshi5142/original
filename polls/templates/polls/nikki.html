@@ -1,0 +1,43 @@
+{% extends 'polls/base.html' %} {% block content %} {% load md %} {% load static %}
+
+<body>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <div class="card border-dark m-1">    
+                <div class="card ">
+                    <h3  class="mx-auto">{{playnikki.title}}</h3>
+                      <ul>
+                        <li><p>{{playnikki.user.username}}</p></li>
+                        <li><p>{{playnikki.pub_date}}</p></li>
+                        {% if playnikki.image %}
+                        <img src="{{ playnikki.image.url }}" class="img-fluid" alt="Responsive image" width="80%"> {% endif %}
+                        <li><p>{{playnikki.nikki| markdown_to_html}}</p></li>
+                        {% for tag in playnikki.tag.all %}
+                        <p><button type="button" class="btn btn-primary btn-sm">{{tag.name}}</button></p>
+                        {% endfor %}
+                      </ul>
+                    <p><a href="{% url 'commentcreate' playnikki.id %}">コメントする</a></p>
+                </div>
+              </div>
+
+                {% for comment in playnikki.comment_set.all %}
+                <!--主従の従側から持ってくる場合はsetを使う-->
+                <div class="card border-dark m-1">
+                    <!--for文のすぐ下-->
+
+                    <p>{{comment.name}}</P>
+                    <p>{{comment.text}}</P>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+    <a href="/">トップページ</a>
+
+</body>
+
+{% endblock %}

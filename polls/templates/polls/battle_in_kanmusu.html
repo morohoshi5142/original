@@ -1,0 +1,21 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+
+
+{% if sanka_kanmusu_list %}
+    <ul>
+<a href="/polls/">トップページ</a> 
+
+<h4>{{battle.name}}</h4>
+    <p>艦娘名</p>
+    {% for sanka_kanmusu in sanka_kanmusu_list %}
+        <li><a href="{% url 'detail2' sanka_kanmusu.kanmusu.id %}">{{ sanka_kanmusu.kanmusu.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% endblock %}

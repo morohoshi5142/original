@@ -1,0 +1,60 @@
+{% extends 'polls/base.html' %} {% block content %} {% load md %} {% load static %}
+
+<body>
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"> {% if playnikki_list %}
+    <div class="card-group">
+        {% for playnikki in playnikki_list %}
+        <div class="col-sm-6 col-md-6">
+            <div class="card border-dark m-1">
+                {% if playnikki.image %} 　 <img src="{{ playnikki.image.url }}" class="card-img-top" alt="..."> {% endif %}
+                <div class="card-body">
+                    <a href="{% url 'nikki' playnikki.id %}">
+                        <h3>
+                            <class="card-title">{{playnikki.title}}</h3>
+                    </a>
+                    <h4 class="card-subtitle mb-2 text-muted">{{playnikki.user.username}}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">{{playnikki.pub_date}}</h6>
+                    <p class="card-text">{{playnikki.nikki| mark_down_to_text |truncatechars:30 }}</p>
+                    {% for tag in playnikki.tag.all %}
+                    <p><button type="button" class="btn btn-primary btn-sm">{{tag.name}}</button></p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <h3><div class="alert alert-primary" role="alert"><a href= "{% url 'nikkilist' %}">過去の投稿一覧</a></div></h3>
+
+
+
+
+    </div>
+    
+
+
+
+
+    {% else %}
+    <p>No polls are available.</p>
+    {% endif %}
+
+    </div>
+
+
+
+
+    <div>
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+{% endblock %}

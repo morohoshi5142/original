@@ -1,0 +1,18 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+<div class="alert alert-primary" role="alert">
+  艦種別に探せます♪
+</div>
+
+<h1>艦種リスト</h1>
+{% if latest_kansyu_list %}
+    <ul>
+    {% for kansyu in latest_kansyu_list %}    
+        <li><h4><a href="{% url 'kansyu_by_type' kansyu.id %}">{{kansyu.name}}</a></h4>    <p>{{kansyu.setumei}}</p></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,42 @@
+
+
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+
+p.shigure {
+    line-height:1.5;
+    display:inline;
+    font-size:20px
+    
+}
+
+</style>
+
+
+{% if kansyus %}
+{% for kansyuname,ogatadict in kansyus.items %}
+    <h3>{{kansyuname}}</h3>
+    {% for oogataname,kanmusus in ogatadict.items %}
+    <h6><div class="p-3 mb-2 bg-dark text-white">{{oogataname}}</div></h6>
+    <span style="background:#CFF; ">
+        {% for kanmusu in kanmusus %}
+            <p class='shigure'><a href="{% url 'detail2' kanmusu.id %}" class="text-primary" >
+                    {{kanmusu.name}}</a>  /</p>
+               
+                  
+        {% endfor %}
+    </span>  
+    {% endfor %}
+    
+{% endfor %}    
+    
+    
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+<h2><a href="/">トップページ</a></h2>
+
+{% endblock %}

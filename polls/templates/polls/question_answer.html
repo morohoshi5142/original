@@ -1,0 +1,30 @@
+{% extends "polls/base.html" %} <!--質問解答用のテンプレート-->
+
+{% block content %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+
+<body>
+    
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+
+<form method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+    
+        <p>ユーザー名</p>
+        <p>{{ form.name |add_class:"form-control"}}</p>
+        <div class="form-row">
+        </div>        
+        <p>{{ form.text|add_class:"form-control" }}</p>
+
+        
+        <p><button type="submit">save</button></p>
+</form>
+
+</body>
+
+{% endblock %}

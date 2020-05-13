@@ -1,0 +1,72 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+{% load md %}
+{% load static %}
+
+<body>
+    
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+
+{% if playnikki_list %}
+<div class="card-group">
+    {% for playnikki in playnikki_list %}
+        <div class="col-sm-6 col-md-6">
+            <div class="card border-primary">
+              {% if playnikki.image %}
+            　  <img src="{{ playnikki.image.url }}" class="card-img-top" alt="...">
+              {% endif %}
+              <div class="card-body">
+                <a href="{% url 'nikki' playnikki.id %}"><h3 class="card-title">{{playnikki.title}}</h3></a>
+                <h6 class="card-subtitle mb-2 text-muted">{{playnikki.user.username}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{playnikki.pub_date}}</h6>
+                <p class="card-text">{{playnikki.nikki| mark_down_to_text |truncatechars:30  }}</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+                    {% for tag in playnikki.tag.all %}
+                        <p><button type="button" class="btn btn-primary btn-sm">{{tag.name}}</button></p>
+                    {% endfor %}  
+                
+              </div>
+            </div>  
+        </div>
+    {% endfor %} 
+</div>
+
+<ul class="pagination">
+    <!-- 前へ の部分 -->
+    {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    {% endif %}
+
+    <!-- 数字の部分 -->
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <li class="page-item active"><a class="page-link" href="#!">{{ num }}</a></li>
+        {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+    {% endfor %}
+
+    <!-- 次へ の部分 -->
+    {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    {% endif %}
+</ul>
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+<a href="/">トップページ</a>
+</body>
+{% endblock %}

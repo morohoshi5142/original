@@ -1,0 +1,19 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+
+
+{% if latest_battle_name %}
+    <ul>
+<a href="/polls/">トップページ</a>    
+    <p>作戦名</p>
+    {% for battle_name in latest_battle_name %}
+        <li>{{battle_name.name}} 　　　　<a href='{% url "sanka_kanmusu" battle_name.id %}'> 参加艦娘</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% endblock %}

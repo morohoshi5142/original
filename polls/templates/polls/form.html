@@ -1,0 +1,47 @@
+{% extends "polls/base.html" %}
+
+{% block content %}
+
+{% load widget_tweaks %}
+{% load static %}
+
+
+<body>
+    
+
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+
+        <form method="post"  enctype="multipart/form-data">
+                {% csrf_token %}
+            
+                <p>ユーザー名</p>
+                <p>{{ form.user |add_class:"form-control"}}</p>
+                <p>投稿日時</p>
+                <p>{{ form.pub_date |add_class:"form-control"}}</p>
+                <div class="form-row">
+                        <div class="form-group col-md-6">
+                         <label for="inputEmail4">タイトル</label>
+                         {{ form.title |add_class:"form-control"}}
+                        </div>
+                </div>        
+                <p>{{ form.nikki|add_class:"form-control" }}</p>
+                <p>画像</p>
+                <p>{{form.image |add_class:"form-control-file"}}</p>
+                <h2>タグ</h2>
+                    {{ formset.management_form }}
+                    {% for tag_form in formset %}
+                        {{ tag_form.as_p }}
+                        <hr>
+                     {% endfor %}
+                
+                
+                <p><button type="submit">save</button></p>
+        </form>
+{{ form.media }}
+
+</body>
+
+{% endblock %}
+
+   

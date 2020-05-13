@@ -1,0 +1,26 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+{% if ivent_naiyous %}
+
+<h2>{{ivent_naiyous.0.ivent.name}}</h2>
+
+ <a href="/polls/">トップページ</a>  
+    {% for ivent_naiyou in  ivent_naiyous %}
+    
+    <p>{{ivent_naiyou.naiyou}}</p>
+        <ul>
+        {% for tokkokanmusu in ivent_naiyou.tokkokanmusu_set.all %}
+            <a href="/">{{tokkokanmusu}}</a> |
+        {% endfor %}
+        </ul>
+        
+    {% endfor %}
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+
+
+{% endblock %}

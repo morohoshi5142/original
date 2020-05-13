@@ -1,0 +1,14 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+<h1>艦種リスト</h1>
+{% if oogatas %}
+    <ul>
+    {% for oogata in oogatas %}    
+        <li><a href="{% url 'kanmusu_by_type' oogata.id %}">{{oogata.typename}}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock %}

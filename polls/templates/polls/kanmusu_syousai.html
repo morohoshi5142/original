@@ -1,0 +1,25 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+
+
+
+<h1>{{ kanmusu.name }}</h1>
+<ul>
+    <li><div class="alert alert-primary" role="alert">{{ kanmusu.OOgata.kansyu }}　{{ kanmusu.OOgata}}</div></li>
+    <li><div class="alert alert-primary" role="alert">一人称　　{{ kanmusu.ichinin}}</div></li>
+    <li><div class="alert alert-primary" role="alert">戦闘スタイル　　{{ kanmusu.Fsutairu}}</div></li>
+    <li><div class="alert alert-primary" role="alert">特徴、戦歴など　　{{ kanmusu.tokuchou}}</div></li>
+    <li><div class="alert alert-primary" role="alert">イラストレーター　　{{ kanmusu.eshi}}</div></li>
+    <li><div class="alert alert-primary" role="alert">声優　　<a href="/polls/seiyu/{{ kanmusu.seiyu.id }}/">{{ kanmusu.seiyu}}</a></div>
+    <li><div class="alert alert-primary" role="alert">
+        人気　　  <a href="{% url 'kanmusu_ninnki' kanmusu.id %}" class ="text-white">人気投票</a>{{ kanmusu.like_num }}
+    </div>
+    </li>
+</ul>
+
+{% endblock %}
+
+              <!--<div class="badge badge-pill badge-success ">-->
+              <!--  <a href="{% url 'like' user.id %}" class ="text-white">いいね！</a>{{ answer.like_num }}-->
+              <!--</div> -->
