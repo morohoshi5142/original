@@ -6,11 +6,10 @@
         {% for playnikki in playnikki_list %}
         <div class="col-sm-6 col-md-6">
             <div class="card border-dark m-1">
-                {% if playnikki.image %} 　 <img src="{{ playnikki.image.url }}" class="card-img-top" alt="..."> {% endif %}
+                {% if playnikki.image %} 　<img src="{{ playnikki.image.url }}" class="card-img-top" alt="..."> {% endif %}
                 <div class="card-body">
                     <a href="{% url 'nikki' playnikki.id %}">
-                        <h3>
-                            <class="card-title">{{playnikki.title}}</h3>
+                        <h3><class="card-title">{{playnikki.title}}</h3>
                     </a>
                     <h4 class="card-subtitle mb-2 text-muted">{{playnikki.user.username}}</h4>
                     <h6 class="card-subtitle mb-2 text-muted">{{playnikki.pub_date}}</h6>
