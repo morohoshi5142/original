@@ -97,6 +97,7 @@ def kanmusu_list(request):
 
     
 def kanmusu_list2(request):
+    tag = Tag.objects.all()
     kansyus = Kansyu.objects.all()
     data = {}
     for kansyu in kansyus:
@@ -106,7 +107,7 @@ def kanmusu_list2(request):
             data2[ogata.typename] = ogata.kanmusu_set.order_by('number')
         data[kansyu.name] = data2
     print(data)
-    context = {'kansyus': data}
+    context = {'kansyus': data,'tag':tag}
     return render(request, 'polls/kanmusu_list.1.html', context)
 
 
@@ -148,6 +149,7 @@ class NikkiCreateView(CreateView):
         print(request.POST)
         form = self.form_class(request.POST)
         if form.is_valid():
+            tag = Tag.objects.all()
             obj = form.save(commit=False)
             obj.user = self.request.user
             if 'image' in self.request.FILES.keys():
@@ -168,9 +170,11 @@ class NikkiCreateView(CreateView):
                 return render(self.request, 'polls/form.html', context)
             
     def get_context_data(self, **kwargs):
+        tag = Tag.objects.all()
         context = super().get_context_data(**kwargs) # はじめに継承元のメソッドを呼び出す
         formset = TagInlineFormSet()
         context["formset"] = formset
+        context["tag"] = tag
         return context
     
 class NikkiListView(ListView):
@@ -269,6 +273,8 @@ class CommentCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['post'] = get_object_or_404(Playnikki, pk=self.kwargs['pk'])
+        tag = Tag.objects.all()
+        context["tag"] = tag
         return context
 
 
@@ -296,7 +302,6 @@ class QuestionCreateView(CreateView):
                 print('a')
                 obj.save()
                 formset.save()
-
                 return HttpResponseRedirect(reverse('index'))
             else:
                 context = {'form':form,'formset':formset}
@@ -311,6 +316,8 @@ class QuestionCreateView(CreateView):
         context = super().get_context_data(**kwargs) # はじめに継承元のメソッドを呼び出す
         formset = TagInlineFormSet()
         context["formset"] = formset
+        tag = Tag.objects.all()
+        context["tag"] = tag
         return context
 
 # 質問詳細        
