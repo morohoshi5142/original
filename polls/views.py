@@ -366,6 +366,13 @@ class QuestionListView(ListView):
     def get_queryset(self):
         # 公開フラグがTrueで、作成日順に並び替え
         return super().get_queryset().order_by('-pub_date')
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) # はじめに継承元のメソッドを呼び出す
+        tag = Tag.objects.all()
+        context["tag"] = tag
+        return context
+        
 
 
 def like(request, *args, **kwargs):
