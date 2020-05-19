@@ -42,12 +42,14 @@ def detail2(request, kanmusu_id):
     
 def detail3(request):
     latest_seiyu_list = Seiyu.objects.order_by('-id')[:]
-    context = {'latest_seiyu_list': latest_seiyu_list}
+    tag = Tag.objects.all()
+    context = {'latest_seiyu_list': latest_seiyu_list,'tag' : tag}
     return render(request, 'polls/seiyu_list.html', context)
     
 def seiyu_syousai(request, seiyu_id):
     seiyu = get_object_or_404(Seiyu, pk=seiyu_id)
-    return render(request, 'polls/seiyu.syousai.html', {'seiyu': seiyu})   
+    tag = Tag.objects.all()
+    return render(request, 'polls/seiyu.syousai.html', {'seiyu': seiyu,'tag':tag})   
     
 def seiyu_tanto(request, seiyu_id):
     tantos = Kanmusu.objects.filter(seiyu=seiyu_id)
@@ -55,7 +57,8 @@ def seiyu_tanto(request, seiyu_id):
     
 def kansyu(request):
     latest_kansyu_list = Kansyu.objects.order_by('-id')[:]
-    context = {'latest_kansyu_list':latest_kansyu_list}
+    tag = Tag.objects.all()
+    context = {'latest_kansyu_list':latest_kansyu_list,'tag':tag}
     return render(request, 'polls/kansyu.html',context)
     
     
@@ -76,7 +79,8 @@ def kansyu_setumei(request):
     
 def battle_name(request):
     latest_battle_name = Battle.objects.order_by('-id')[:]
-    context  = {'latest_battle_name':latest_battle_name}
+    tag = Tag.objects.all()
+    context  = {'latest_battle_name':latest_battle_name,'tag':tag}
     return render(request, 'polls/battle.html', context)
     
     
@@ -114,14 +118,14 @@ def kanmusu_list2(request):
     
 def ivent(request):
     ivents = Ivent.objects.order_by('-id')[:]
-    context = {'ivents':ivents}
+    tag = Tag.objects.all()
+    context = {'ivents':ivents,'tag':tag}
     return render (request, 'polls/ivent.html', context)
     
 def ivent_naiyou(request,name_id):
     ivent_naiyous = Ivent_naiyou.objects.filter(ivent=name_id)
-    context = {
-        'ivent_naiyous':ivent_naiyous,
-    }
+    tag = Tag.objects.all()
+    context = {'ivent_naiyous':ivent_naiyous,'tag':tag}
     print(context)
     return render(request, 'polls/ivent_naiyou.html', context)
     

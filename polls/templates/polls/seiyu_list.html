@@ -5,7 +5,7 @@
 {% if latest_seiyu_list %}
     <ul>
     {% for seiyu in latest_seiyu_list %}
-        <li><a href="/polls/seiyu/{{seiyu.id}}/">{{seiyu.name}}</a> 
+        <li><a href="{% url 'seiyu_syousai' seiyu.id %}">{{seiyu.name}}</a> 
         <a href="{% url 'seiyu_tanto' seiyu.id %}" >担当艦娘</a></li>
     {% endfor %}    
     </ul>
