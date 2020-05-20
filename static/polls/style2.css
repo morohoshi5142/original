@@ -1,0 +1,10 @@
+
+
+body {
+    background-image:url("images/3269988_s.jpg");
+    background-color: rgba(255,255,255,0.5);
+    background-blend-mode:lighten;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

@@ -1,0 +1,25 @@
+li a {
+    color: green;
+}
+body {
+    background-image:url("images/9300b46ef0c34f2cccaa72ff57401008_s.jpg");
+    background-color: rgba(255,255,255,0.5);
+    background-blend-mode:lighten;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+}
+
+
+a.navbar-brand { color: #ff0000;
+font-family: 'Bangers', cursive;
+}
+
+h3 {
+    font-family:"Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+}
+
+.text-pink {
+    color:#FF8888 !important;
+}
