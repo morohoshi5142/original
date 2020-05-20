@@ -1,7 +1,7 @@
 astroid==1.6.6
 certifi==2019.11.28
 chardet==3.0.4
-Django==2.0.2
+Django==2.2.10
 django-markdownx==3.0.1
 django-widget-tweaks==1.4.8
 html5lib==1.0.1
