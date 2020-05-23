@@ -13,8 +13,8 @@
 {% if playnikki_list %}
 <div class="card-group">
     {% for playnikki in playnikki_list %}
-        <div class="col-sm-6 col-md-6">
-            <div class="card border-primary">
+        <div class="col-sm-6 col-md-6 ">
+            <div class="card border-primary m-1">
               {% if playnikki.image %}
             　  <img src="{{ playnikki.image.url }}" class="card-img-top" alt="...">
               {% endif %}
@@ -26,14 +26,13 @@
                     {% for tag in playnikki.tag.all %}
                         <p><button type="button" class="btn btn-primary btn-sm">{{tag.name}}</button></p>
                     {% endfor %}  
-                
               </div>
             </div>  
         </div>
     {% endfor %} 
 </div>
     <div class = "container ">
-        <div class = "row justify-content-center">
+        <div class = "row justify-content-center px-0.25">
             <ul class="pagination">
                 <!-- 前へ の部分 -->
                 {% if page_obj.has_previous %}
