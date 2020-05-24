@@ -179,3 +179,10 @@ class Kannmusu_like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='kannmusu_like_user')
     target = models.ForeignKey(Kanmusu, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date published',default=timezone.now)
+    
+    
+# class Map(models.Model):
+#     mapname
+#     apimap
+#     jyusyo
+#     image
