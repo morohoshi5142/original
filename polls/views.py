@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 import random
-from .models import Question,Kanmusu,Seiyu,Kansyu,Oogata,Sanka_kanmusu,Kansyu_setumei,Battle,Ivent,Ivent_naiyou,Tokkokanmusu,Comment,Kannmusu_like
+from .models import Question,Kanmusu,Seiyu,Kansyu,Oogata,Sanka_kanmusu,Kansyu_setumei,Battle,Ivent,Ivent_naiyou,Tokkokanmusu,Comment,Kannmusu_like,Map
 from django.urls import reverse
 
 from django.views.generic import CreateView,ListView, DetailView
@@ -511,3 +511,9 @@ def graph2(request):
 #     latest_kanmusu_list = Kanmusu.objects.order_by('OOgata').order_by('kansyu')[:]
 #     context = {'latest_kanmusu_list': latest_kanmusu_list}
 #     return render(request, 'polls/kanmusu_name.html', context)
+#     seiyu = get_object_or_404(Seiyu, pk=seiyu_id)
+
+def api_map(request,map_id):
+    map = get_object_or_404(Map,pk=map_id)
+    return render(request, 'polls/api_map.html',{'map': map})
+

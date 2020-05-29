@@ -37,6 +37,6 @@ urlpatterns = [
     path('<int:kanmusu_id>/kanmusu_ninnki/', views.kanmusu_ninnki, name='kanmusu_ninnki'),
     path('graph', views.graph, name='graph'),
     path('graph2', views.graph2, name='graph2'),
-
+    path('api_map/<int:map_id>', views.api_map, name='api_map'),
    ]
                 

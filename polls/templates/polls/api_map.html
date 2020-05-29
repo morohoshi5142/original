@@ -1,0 +1,63 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC94_hScZ7P8qqD5WzrGrxnjcXEw3gknpw&callback=initMap" async></script>
+<script type="text/javascript">
+  var map;
+  var marker;
+  var geocoder;
+  function initMap() {
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({
+    'address': '{{map.jyusyo}}' //住所
+    }, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+      map = new google.maps.Map(document.getElementById('gmap'), {
+        center: results[0].geometry.location,
+        zoom: 17 //ズーム
+     });
+    marker = new google.maps.Marker({
+    position: results[0].geometry.location,
+    map: map
+    });
+    infoWindow = new google.maps.InfoWindow({
+    content: '<h4>{{map.map_name}}</h4>'
+    });
+    marker.addListener('click', function() {
+      infoWindow.open(map, marker);
+    });
+    } else {
+      alert(status);
+    }
+  });
+}
+</script>
+<div id="gmap"></div>
+
+<style type="text/css">
+#gmap {
+    width:100%;
+   height:500px;
+}</style>
+
+
+<!--{% block content %}-->
+
+<!--<h1>{{ seiyu.name }}</h1>-->
+<!--<ul>-->
+<!--    <li>{{ seiyu.seiyu_url }}</li>-->
+<!--    <li>{{ seiyu.seiyu_syozoku}}</li>-->
+    
+<!--</ul>-->
+
+<!--{% endblock %}-->
+
+<!--class Map(models.Model):-->
+<!--    map_name = models.CharField(max_length=100)-->
+<!--    jyusyo = models.CharField(max_length=100)-->
+<!--    kanmusu = models.ManyToManyField(Kanmusu, blank=True)-->
+
+<!--    def __str__(self):-->
+<!--        return self.map_name-->
+
+<!--def api_map(request,map_id):-->
+<!--    map = get_object_or_404(Map,pk=map_id)-->
+<!--    return render(request, 'polls/api_map.html')-->
+

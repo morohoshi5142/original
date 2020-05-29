@@ -181,8 +181,10 @@ class Kannmusu_like(models.Model):
     pub_date = models.DateTimeField('date published',default=timezone.now)
     
     
-# class Map(models.Model):
-#     mapname
-#     apimap
-#     jyusyo
-#     image
+class Map(models.Model):
+    map_name = models.CharField(max_length=100)
+    jyusyo = models.CharField(max_length=100)
+    kanmusu = models.ManyToManyField(Kanmusu, blank=True)
+
+    def __str__(self):
+        return self.map_name
