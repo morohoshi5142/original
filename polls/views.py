@@ -79,9 +79,10 @@ def kansyu_setumei(request):
     
 def battle_name(request):
     latest_battle_name = Battle.objects.order_by('-id')[:]
+    map = Map.objects.all()
     tag = Tag.objects.all()
-    context  = {'latest_battle_name':latest_battle_name,'tag':tag}
-    return render(request, 'polls/battle.html', context)
+    context  = {'latest_battle_name':latest_battle_name,'tag':tag,'map':map}
+    return render(request, 'polls/map_list.html', context)
     
     
 def sanka_kanmusu(request,battle_id):
