@@ -1,3 +1,22 @@
+{% if map %}
+<ul>
+  <li>{{map.map_name}}</li>
+  <li>{{map.jyusyo}}</li>
+  {% for kanmusu in map.kanmusu.all %}
+    <li>{{kanmusu.name}}</li>
+  {% endfor %}
+</ul>
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+    <!--{% for tag in playnikki.tag.all %}-->
+    <!--<p><button type="button" class="btn btn-primary btn-sm">{{tag.name}}</button></p>-->
+    <!--{% endfor %}-->
+
+
+
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC94_hScZ7P8qqD5WzrGrxnjcXEw3gknpw&callback=initMap" async></script>
 <script type="text/javascript">
   var map;
@@ -33,8 +52,8 @@
 
 <style type="text/css">
 #gmap {
-    width:100%;
-   height:500px;
+    width:50%;
+   height:400px;
 }</style>
 
 
