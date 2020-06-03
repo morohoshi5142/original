@@ -23,8 +23,6 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{playquestion.user.username}}</h6>
                 <h6 class="card-subtitle mb-2 text-muted">{{playquestion.pub_date}}</h6>
                 <p class="card-text">{{playquestion.question_text| mark_down_to_text |truncatechars:30  }}</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
                     {% for tag in playquestion.tag.all %}
                         <p><button type="button" class="btn btn-primary btn-sm">{{tag.name}}</button></p>
                     {% endfor %}  

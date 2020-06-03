@@ -1,34 +1,27 @@
 {% extends 'polls/base.html' %} {% block content %} {% load md %} {% load static %}
 
 <body>
-{% if maps %}
-    <ul>
-    <p>聖地</p>
-    {% for map in maps %}
-        <li>{{map.map_name}}        <a href='{% url "api_map" map.id %}'>マップ</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}    
+{% if map %}
+<ul>
+  <li>{{map.map_name}}</li>
+  <li>{{map.jyusyo}}</li>
+  {% for kanmusu in map.kanmusu.all %}
+    <li>{{kanmusu.name}}</li>
+  {% endfor %}
+</ul>
 
-{% if latest_battle_name %}
-    <ul>
-    <p>作戦名</p>
-    {% for battle_name in latest_battle_name %}
-        <li>{{battle_name.name}} 　　　　<a href='{% url "sanka_kanmusu" battle_name.id %}'> 参加艦娘</a></li>
-    {% endfor %}
-    </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+
+
+
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC94_hScZ7P8qqD5WzrGrxnjcXEw3gknpw&callback=initMap" async></script>
 <script type="text/javascript">
   var map; 
   var marker;
   var geocoder;
-  var currentInfoWindow = null;
   function initMap() {
     var center= {
       lat: 34.7019399, // 緯度
@@ -39,33 +32,26 @@
             zoom: 5 // 地図のズームを指定
         }); 
     
-    {% for map in maps %}
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({
     'address': '{{map.jyusyo}}' //住所
     }, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
-// マーカーの中にアイコン設定のコードを書く      
-        marker{{forloop.counter}} = new google.maps.Marker({
+      
+        marker = new google.maps.Marker({
         position: results[0].geometry.location,
-        map: map,
+        map: map
         });
-        infoWindow{{forloop.counter}} = new google.maps.InfoWindow({
+        infoWindow = new google.maps.InfoWindow({
         content: '<h4>{{map.map_name}}</h4>'
         });
-        marker{{forloop.counter}}.addListener('click', function() {
-          infoWindow{{forloop.counter}}.open(map, marker{{forloop.counter}});
-          if (currentInfoWindow) {
-            currentInfoWindow.close();
-          }
-          currentInfoWindow = infoWindow{{forloop.counter}};
-
+        marker.addListener('click', function() {
+          infoWindow.open(map, marker);
         });
         } else {
           alert(status);
         }
       });
-    {% endfor %}
     }
 </script>
 <div id="gmap"></div>
@@ -76,8 +62,7 @@
    height:700px;
 }</style>
 
-
-
 </body>
+
 
 {% endblock %}

@@ -1,3 +1,6 @@
+{% extends 'polls/base.html' %} {% block content %} {% load md %} {% load static %}
+
+<body>
 {% if map %}
 <ul>
   <li>{{map.map_name}}</li>
@@ -56,8 +59,7 @@
    height:400px;
 }</style>
 
-
-<!--{% block content %}-->
+</body>
 
 <!--<h1>{{ seiyu.name }}</h1>-->
 <!--<ul>-->
@@ -66,7 +68,6 @@
     
 <!--</ul>-->
 
-<!--{% endblock %}-->
 
 <!--class Map(models.Model):-->
 <!--    map_name = models.CharField(max_length=100)-->
@@ -80,3 +81,4 @@
 <!--    map = get_object_or_404(Map,pk=map_id)-->
 <!--    return render(request, 'polls/api_map.html')-->
 
+{% endblock %}

@@ -79,9 +79,9 @@ def kansyu_setumei(request):
     
 def battle_name(request):
     latest_battle_name = Battle.objects.order_by('-id')[:]
-    map = Map.objects.all()
+    map_ = Map.objects.all()
     tag = Tag.objects.all()
-    context  = {'latest_battle_name':latest_battle_name,'tag':tag,'map':map}
+    context  = {'latest_battle_name':latest_battle_name,'tag':tag,'maps':map_}
     return render(request, 'polls/map_list.html', context)
     
     
@@ -361,6 +361,8 @@ class AnswerCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['post'] = get_object_or_404(PlayQuestion, pk=self.kwargs['pk'])
+        tag = Tag.objects.all()
+        context["tag"] = tag
         return context
 
 class QuestionListView(ListView):
@@ -516,5 +518,6 @@ def graph2(request):
 
 def api_map(request,map_id):
     map = get_object_or_404(Map,pk=map_id)
-    return render(request, 'polls/api_map.html',{'map': map})
+    tag = Tag.objects.all()
+    return render(request, 'polls/api_map.html',{'map': map,'tag':tag})
 
