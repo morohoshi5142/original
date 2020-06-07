@@ -184,6 +184,8 @@ class Kannmusu_like(models.Model):
 class Map(models.Model):
     map_name = models.CharField(max_length=100)
     jyusyo = models.CharField(max_length=100)
+    ido = models.CharField(max_length=100)
+    keido = models.CharField(max_length=100)
     kanmusu = models.ManyToManyField(Kanmusu, blank=True)
 
     def __str__(self):

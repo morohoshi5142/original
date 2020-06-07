@@ -42,7 +42,7 @@
     {% for map in maps %}
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({
-    'address': '{{map.jyusyo}}' //住所
+    'address': '{{map.ido}},{{map.keido}}' //住所
     }, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
 // マーカーの中にアイコン設定のコードを書く      

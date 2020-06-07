@@ -28,7 +28,7 @@
   function initMap() {
     geocoder = new google.maps.Geocoder();
     geocoder.geocode({
-    'address': '35.282059,139.668711' //住所map.jyusyoを緯度経度の数値にすればOK
+    'address': '{{map.ido}},{{map.keido}}' //住所map.jyusyoを緯度経度の数値にすればOK
     }, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
       map = new google.maps.Map(document.getElementById('gmap'), {
