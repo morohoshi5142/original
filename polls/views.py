@@ -79,6 +79,7 @@ def kansyu_setumei(request):
     
 def battle_name(request):
     latest_battle_name = Battle.objects.order_by('-id')[:]
+    battle = Battle.objects.all()
     map_ = Map.objects.all()
     tag = Tag.objects.all()
     context  = {'latest_battle_name':latest_battle_name,'tag':tag,'maps':map_}

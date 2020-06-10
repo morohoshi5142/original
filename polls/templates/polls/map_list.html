@@ -36,7 +36,7 @@
     };
     map = new google.maps.Map(document.getElementById('gmap'), {
             center: center, // 地図の中心を指定
-            zoom: 5 // 地図のズームを指定
+            zoom: 2 // 地図のズームを指定
         }); 
     
     {% for map in maps %}
@@ -51,21 +51,49 @@
         map: map,
         });
         infoWindow{{forloop.counter}} = new google.maps.InfoWindow({
-        content: '<h4>{{map.map_name}}</h4>'
+        content: '<h4><a href= "{% url "api_map" map.id%}">{{map.map_name}}</a></h4>'
         });
         marker{{forloop.counter}}.addListener('click', function() {
-          infoWindow{{forloop.counter}}.open(map, marker{{forloop.counter}});
           if (currentInfoWindow) {
             currentInfoWindow.close();
           }
+          infoWindow{{forloop.counter}}.open(map, marker{{forloop.counter}});
           currentInfoWindow = infoWindow{{forloop.counter}};
 
         });
-        } else {
-          alert(status);
-        }
+        } 
       });
-    {% endfor %}
+    {% endfor %}　
+    
+          {% for battle in latest_battle_name %}
+          geocoder = new google.maps.Geocoder();
+          geocoder.geocode({
+          'address': '{{battle.ido}},{{battle.keido}}' //住所
+          }, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+      // マーカーの中にアイコン設定のコードを書く      
+              b_marker{{forloop.counter}} = new google.maps.Marker({
+              position: results[0].geometry.location,
+              map: map,
+              icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+              
+              });
+              b_infoWindow{{forloop.counter}} = new google.maps.InfoWindow({
+              content: '<h4><a href= "{% url "sanka_kanmusu" battle.id %}">{{battle.name}}</a></h4>'
+              });
+              b_marker{{forloop.counter}}.addListener('click', function() {
+                if (currentInfoWindow) {
+                  currentInfoWindow.close();
+                }
+                b_infoWindow{{forloop.counter}}.open(map, b_marker{{forloop.counter}});
+                currentInfoWindow = b_infoWindow{{forloop.counter}};
+      
+              });
+              }
+            });
+          {% endfor %}
+    
+    
     }
 </script>
 <div id="gmap"></div>
@@ -76,6 +104,25 @@
    height:700px;
 }</style>
 
+
+<!--var marker = new google.maps.Marker({-->
+<!--	map: _map,-->
+<!--	position: new google.maps.LatLng(35.692235, 139.759864),-->
+<!--	animation: google.maps.Animation.DROP,-->
+<!--	icon: {-->
+<!--		fillColor: "#FF0000",                //塗り潰し色-->
+<!--		fillOpacity: 0.8,                    //塗り潰し透過率-->
+<!--		path: google.maps.SymbolPath.CIRCLE, //円を指定-->
+<!--		scale: 16,                           //円のサイズ-->
+<!--		strokeColor: "#FF0000",              //枠の色-->
+<!--		strokeWeight: 1.0                    //枠の透過率-->
+<!--	},-->
+<!--	label: {-->
+<!--		text: 'A',                           //ラベル文字-->
+<!--		color: '#FFFFFF',                    //文字の色-->
+<!--		fontSize: '20px'                     //文字のサイズ-->
+<!--	}-->
+<!--});-->
 
 
 </body>

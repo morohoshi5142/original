@@ -4,14 +4,11 @@
 {% if tantos %}
     <ul>
     {% for tanto in tantos %}
-        <li><a href="/polls/kanmusu_syousai/{{ tanto.id}}/">{{ tanto.name }}</a></li>
+        <li><a href= "{% url 'detail2' tanto.id %}">{{ tanto.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>誰も担当していません</p>
 {% endif %}
-<a href="/polls/kanmusu">艦これリスト</a>
-
-<a href="/polls/seiyu">艦これ声優リスト</a>
 
 {% endblock %}
