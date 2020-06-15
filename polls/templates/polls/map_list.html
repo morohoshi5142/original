@@ -3,7 +3,7 @@
 <body>
 {% if maps %}
     <ul>
-    <p>聖地</p>
+    <p>聖　地</p>
     {% for map in maps %}
         <li>{{map.map_name}}        <a href='{% url "api_map" map.id %}'>マップ</a></li>
     {% endfor %}
