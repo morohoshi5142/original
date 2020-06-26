@@ -73,8 +73,9 @@ class Kanmusu(models.Model):
 
 class Battle(models.Model):
     name=models.CharField(max_length=200)
-    ido = models.CharField(max_length=100)
-    keido = models.CharField(max_length=100)
+    naiyo=models.CharField(max_length=1000)
+    ido = models.CharField(max_length=100,null = True,blank = True)
+    keido = models.CharField(max_length=100,null = True,blank = True)
     
     def __str__(self):
         return self.name
